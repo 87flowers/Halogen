@@ -754,18 +754,14 @@ void UciOutput::print_bestmove(bool chess960, Move move)
     {
         std::lock_guard io { output_mutex };
 
-        if (std::rand() % 100 < 5)
-        {
-            move = Move {};
-        }
-
         if (chess960)
         {
             std::cout << "bestmove " << format_chess960 { move } << std::endl;
         }
         else
         {
-            std::cout << "bestmove " << move << std::endl;
+            if (std::rand() % 100 > 1)
+                std::cout << "bestmove " << move << std::endl;
         }
     }
 }
